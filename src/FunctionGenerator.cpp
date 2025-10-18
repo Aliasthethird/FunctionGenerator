@@ -1,4 +1,5 @@
 #include "FunctionGenerator.h"
+
 #include <math.h>
 static constexpr float TWO_PI = 6.28318530717958647692f; // 2π
 
