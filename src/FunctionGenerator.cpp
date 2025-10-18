@@ -93,7 +93,7 @@ void FunctionGenerator::generate(void *parameter)
         switch (self->m_mode)
         {
             case FgMode::DC:       out = 1.0f;                                  break;
-            case FgMode::Sine:     out = std::sinf(TWO_PI * phase);             break;
+            case FgMode::Sine:     out = sinf(TWO_PI * phase);             break;
             case FgMode::Square:   out = (phase < 0.5f) ? 1.0f : -1.0f;         break;
             case FgMode::Saw:      out = 2.0f * phase - 1.0f;                   break;
             case FgMode::Triangle: out = 4.0f * std::fabs(phase - 0.5f) - 1.0f; break;
