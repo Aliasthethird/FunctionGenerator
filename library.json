@@ -43,10 +43,10 @@
   },
   "examples": [
     {
-      "name": "Basic usage",
+      "name": "Function Generator Demo",
       "base": "examples/",
       "files": [
-        "FunctionGenerator_example.cpp"
+        "FunctionGeneratorDemo.cpp"
       ]
     }
   ],

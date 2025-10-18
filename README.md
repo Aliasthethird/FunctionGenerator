@@ -46,12 +46,18 @@ void setup()
   fg1.setMode(FunctionGenerator::FgMode::Sine); 
   fg1.setAmplitude(10);
   fg1.setDcOffset(0);
-  fg1.setPeriod(FG_UPDATE_INTERVAL_SINE_MS * 20); // should be >> FG_UPDATE_INTERVAL_MS for sine wave
+  fg1.setPeriod(FG_UPDATE_INTERVAL_SINE_MS * 20); 
+  // For smoothly varying functions (e.g., sine, triangle, saw),
+  // the update interval must be much smaller than the total period
+  // to ensure the waveform appears continuous and not stepped.
 
   fg2.setMode(FunctionGenerator::FgMode::Square);
   fg2.setAmplitude(0.5);
   fg2.setDcOffset(0.5);
-  fg2.setPeriod(FG_UPDATE_INTERVAL_SQUARE_MS * 2); // can be ~FG_UPDATE_INTERVAL_MS *2 for square wave
+  fg2.setPeriod(FG_UPDATE_INTERVAL_SQUARE_MS * 2); 
+  // For discontinuous functions (e.g., square wave), the update
+  // interval can be closer to the waveform period since the value
+  // changes abruptly between levels.
 }
 
 void loop()
