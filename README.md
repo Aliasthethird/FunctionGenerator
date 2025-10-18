@@ -13,7 +13,7 @@ It continuously generates configurable analog-like waveforms (sine, square, tria
 - Adjustable **amplitude**, **DC offset**, and **period**
 - Thread-safe `getValue()` accessor using FreeRTOS critical sections  
 - Designed for real-time signal synthesis and testing
-- Lightweight and easy to integrate — no dynamic memory allocation  
+- Lightweight and easy to integrate
 
 ---
 
