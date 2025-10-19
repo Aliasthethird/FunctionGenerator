@@ -1,5 +1,8 @@
 # ChangeLog for FunctionGenerator
 
+## [1.0.4] - 2025-10-1
+### update documentation and what to exclude from the registry
+
 ## [1.0.3] - 2025-10-1
 ### remove std:: from sinf() from .cpp and add #include "freertos/task.h" to .h
 

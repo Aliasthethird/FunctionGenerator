@@ -7,16 +7,16 @@ It continuously generates configurable analog-like waveforms (sine, square, tria
 
 ## ✨ Features
 
-- Runs waveform generation in its own FreeRTOS task  
+- Runs waveform generation in its own dedicated FreeRTOS task  
+- **Waveform mode**, **amplitude**, **DC offset**, and **period** can be modified dynamically at runtime or after object creation  
+- **Task update period** is defined during instantiation and remains fixed for the lifetime of the object  
 - Supports multiple waveform modes:
   - `DC`, `Sine`, `Square`, `Saw`, `Triangle`
-- Adjustable **amplitude**, **DC offset**, and **period**
 - Thread-safe `getValue()` accessor using FreeRTOS critical sections  
-- Designed for real-time signal synthesis and testing
+- Designed for real-time signal synthesis and testing  
 - Lightweight and easy to integrate
 
 ---
-
 ## 🧩 Example Usage
 
 ```cpp
