@@ -1,6 +1,6 @@
 {
   "name": "FunctionGenerator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A lightweight FreeRTOS-based Function Generator class for ESP32 that runs waveform generation in a background task.",
   "keywords": [
     "function generator",
@@ -31,6 +31,7 @@
     "exclude": [
       "docs",
       "extras",
+      ".gitignore",
       "test",
       "platformio.ini",
       "**/*.exe"

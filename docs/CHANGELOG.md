@@ -1,5 +1,8 @@
 # ChangeLog for FunctionGenerator
 
+## [1.0.5] - 2025-10-1
+### update example output to align numbs
+
 ## [1.0.4] - 2025-10-1
 ### update documentation and what to exclude from the registry
 

@@ -67,10 +67,10 @@ void loop()
     The value changes continuously in the background,
     as the FreeRTOS task handles waveform generation.
   ------------------------------------------------------*/
-  Serial.print("FG1: ");
-  Serial.print(fg1.getValue(), 2);
-  Serial.print(", FG2: ");
-  Serial.println(fg2.getValue(), 0);
+  char buf[50];
+  snprintf(buf, sizeof(buf), "FG1: %5.1f, FG2: %1.0f", fg1.getValue(), fg2.getValue());
+  Serial.println(buf);
+  
   delay(FG_UPDATE_INTERVAL_SINE_MS);
 
 #ifdef DEBUG
