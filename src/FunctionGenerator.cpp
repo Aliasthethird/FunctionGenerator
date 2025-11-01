@@ -8,8 +8,8 @@ FunctionGenerator::FunctionGenerator(uint16_t updatePeriod_ms) : m_updatePeriod_
     xTaskCreate(
         generate,             // Function that implements the task
         "generate",           // Name of the task (for debugging)
-        // 768,                 // Stack size in words (not bytes)
-        1024,                 // Stack size in words (not bytes)
+        768,                 // Stack size for production
+        // 1024,                 // Stack size for debug
         this,                 // Object passed to the task
         1,                    // Priority (higher = more important)
         &m_generateTaskHandle // Task handle
@@ -93,8 +93,8 @@ void FunctionGenerator::generate(void *parameter)
         float out = 0.0f;
         switch (self->m_mode)
         {
-            case FgMode::DC:       out = 1.0f;                                  break;
-            case FgMode::Sine:     out = sinf(TWO_PI * phase);             break;
+            case FgMode::DC:       out = 0.0f;                                  break;
+            case FgMode::Sine:     out = sinf(TWO_PI * phase);                  break;
             case FgMode::Square:   out = (phase < 0.5f) ? 1.0f : -1.0f;         break;
             case FgMode::Saw:      out = 2.0f * phase - 1.0f;                   break;
             case FgMode::Triangle: out = 4.0f * std::fabs(phase - 0.5f) - 1.0f; break;

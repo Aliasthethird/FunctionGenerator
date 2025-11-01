@@ -1,7 +1,10 @@
 # ChangeLog for FunctionGenerator
 
+## [1.0.6] - 2025-10-1
+### Set amplitude to zero for DC mode
+
 ## [1.0.5] - 2025-10-1
-### update example output to align numbs
+### Update the example output to align numbers
 
 ## [1.0.4] - 2025-10-1
 ### update documentation and what to exclude from the registry
