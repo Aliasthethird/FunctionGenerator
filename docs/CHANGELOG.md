@@ -1,6 +1,6 @@
 # ChangeLog for FunctionGenerator
 
-## [1.0.6] - 2025-10-1
+## [1.0.6] - 2025-11-1
 ### Set amplitude to zero for DC mode
 
 ## [1.0.5] - 2025-10-1
