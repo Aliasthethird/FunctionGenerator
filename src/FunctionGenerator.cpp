@@ -8,8 +8,7 @@ FunctionGenerator::FunctionGenerator(uint16_t updatePeriod_ms) : m_updatePeriod_
     xTaskCreate(
         generate,             // Function that implements the task
         "generate",           // Name of the task (for debugging)
-        768,                 // Stack size for production
-        // 1024,                 // Stack size for debug
+        1024,                 // Stack size
         this,                 // Object passed to the task
         1,                    // Priority (higher = more important)
         &m_generateTaskHandle // Task handle
@@ -86,12 +85,23 @@ void FunctionGenerator::generate(void *parameter)
     TickType_t lastWake = xTaskGetTickCount();
     while (true)
     {
-        // xTaskGetTickCount();
-        // float phase = (millis() % self->m_T) / (float)self->m_T;
-        float phase = (xTaskGetTickCount() * portTICK_PERIOD_MS % self->m_T) / (float)self->m_T;
+        // 1) Snapshot shared configuration atomically
+        uint32_t T;
+        float amp, dc;
+        FgMode mode;
+
+        portENTER_CRITICAL(&self->m_lock);
+        T    = self->m_T;
+        amp  = self->m_amp;
+        dc   = self->m_dc;
+        mode = self->m_mode;
+        portEXIT_CRITICAL(&self->m_lock);
+
+        // 2) Compute using the snapshot (no lock held)
+        float phase = (xTaskGetTickCount() * portTICK_PERIOD_MS % T) / (float)T;
 
         float out = 0.0f;
-        switch (self->m_mode)
+        switch (mode)
         {
             case FgMode::DC:       out = 0.0f;                                  break;
             case FgMode::Sine:     out = sinf(TWO_PI * phase);                  break;
@@ -100,8 +110,11 @@ void FunctionGenerator::generate(void *parameter)
             case FgMode::Triangle: out = 4.0f * std::fabs(phase - 0.5f) - 1.0f; break;
         }
 
+        float value = amp * out + dc;
+
+        // 3) Publish the output atomically
         portENTER_CRITICAL(&self->m_lock);
-        self->m_fgValue = self->m_amp * out + self->m_dc;
+        self->m_fgValue = value;
         portEXIT_CRITICAL(&self->m_lock);
 
         vTaskDelayUntil(&lastWake, pdMS_TO_TICKS(self->m_updatePeriod_ms));
