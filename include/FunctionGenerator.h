@@ -5,7 +5,6 @@
 #include "freertos/portmacro.h"
 #include "freertos/task.h"
 
-
 /*------------------------------------------------------------------*/
 /**
  * @class FunctionGenerator
@@ -49,8 +48,8 @@ public:
     // 0: DC, 1: Sine, 2; Square, 3: Saw, 4: Triangle
     void setModeFromIndex(int idx);
 
-        TaskHandle_t m_generateTaskHandle = nullptr;
 private:
+    TaskHandle_t m_generateTaskHandle = nullptr;
     uint32_t m_T = 1000;
     float m_fgValue = 0.0f;
     float m_dc = 0.0f;
